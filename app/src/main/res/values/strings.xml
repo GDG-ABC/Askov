@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Askov</string>
+    <string name="hello_world">Hello Askov!</string>
+    <string name="action_settings">Settings</string>
+</resources>
