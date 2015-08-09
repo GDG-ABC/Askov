@@ -1,2 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<!-- Aqui vira todos os valores de colores para o app -->
+<resources>
+    <!-- Cores Basica dos itens do ToolBar -->
+    <color name="colorPrimary">#2196F3</color>
+    <color name="colorPrimarydark">#1976D2</color>
+    <color name="colorAccent">#F44336</color>
+    <color name="textColorPrimary">#FFFFFF</color>
+    <color name="windowColorBackground">#DDDDDD</color>
+</resources>
