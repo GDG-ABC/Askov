@@ -1,8 +1,23 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!--Customizar os itens do toolbar no tema -->
+        <!-- Cor do ActionBar -->
+        <item name="android:colorPrimary">@color/colorPrimary</item>
+        <!-- Color -->
+        <item name="android:colorPrimaryDark">@color/colorPrimarydark</item>
+        <item name="android:colorAccent">@color/colorAccent</item>
+        <item name="android:navigationBarColor">@color/colorPrimarydark</item>
+        <!-- Cor do Texto do Toolbar-->
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
+
+        <item name="android:colorBackground">@color/windowColorBackground</item>
+        <item name="android:windowActionModeOverlay">true</item>
+    </style>
+
+    <style name="Theme.AppBar.Normal" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
     </style>
 
 </resources>
