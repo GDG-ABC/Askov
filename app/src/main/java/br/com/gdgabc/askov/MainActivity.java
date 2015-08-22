@@ -4,13 +4,40 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import br.com.gdgabc.askov.model.Group;
+import br.com.gdgabc.askov.service.MeetupApi;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class MainActivity extends AppCompatActivity {
+
+    TextView groupInfoTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        groupInfoTextView = (TextView) this.findViewById(R.id.group_id_text);
+
+        Callback<Group> callback = new Callback<Group>() {
+            @Override
+            public void success(Group group, Response response) {
+                groupInfoTextView.setText("Próximo evento do GDG ABC:\n" + group.getNextEventName() + " (" + group.getNextEventId() + ")");
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Toast.makeText(MainActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        };
+
+        MeetupApi meetupApi = new MeetupApi();
+        meetupApi.getGroup(callback);
     }
 
 
