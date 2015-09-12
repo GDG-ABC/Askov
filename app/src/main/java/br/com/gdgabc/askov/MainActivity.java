@@ -8,7 +8,10 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import br.com.gdgabc.askov.model.Group;
+import br.com.gdgabc.askov.model.Rsvp;
 import br.com.gdgabc.askov.service.MeetupApi;
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -17,13 +20,35 @@ import retrofit.client.Response;
 public class MainActivity extends AppCompatActivity {
 
     TextView groupInfoTextView;
+    TextView namesTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        final MeetupApi meetupApi = new MeetupApi();
+
         groupInfoTextView = (TextView) this.findViewById(R.id.group_id_text);
+        namesTextView = (TextView) this.findViewById(R.id.names_text);
+
+        final Callback<List<Rsvp>> callbackRsvps = new Callback<List<Rsvp>>() {
+            @Override
+            public void success(List <Rsvp> rsvpList, Response response)
+            {
+                String nomes = "";
+                for ( int i = 0; i < rsvpList.size();  i++ ){
+                    nomes += rsvpList.get(i).getMemberName() + " ";
+                }
+
+                namesTextView.setText(nomes);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Toast.makeText(MainActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        };
 
         Callback<Group> callback = new Callback<Group>() {
             @Override
@@ -33,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
                     nextEventName = getString(R.string.no_scheduled_meetup);
                 }
                 groupInfoTextView.setText("Próximo evento do GDG ABC:\n" + nextEventName);
+                meetupApi.getRsvp(group.getNextEventId(), callbackRsvps);
             }
 
             @Override
@@ -41,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        MeetupApi meetupApi = new MeetupApi();
         meetupApi.getGroup(callback);
     }
 

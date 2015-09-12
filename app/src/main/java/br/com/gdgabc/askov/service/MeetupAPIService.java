@@ -2,6 +2,7 @@ package br.com.gdgabc.askov.service;
 
 import br.com.gdgabc.askov.model.Group;
 import br.com.gdgabc.askov.model.MeetupApiResults;
+import br.com.gdgabc.askov.model.Rsvp;
 import retrofit.Callback;
 import retrofit.client.Response;
 import retrofit.http.GET;
@@ -18,4 +19,9 @@ public interface MeetupAPIService {
                   @Query("sign") boolean sign,
                   @Query("fields") String optionalFields,
                   Callback<MeetupApiResults<Group>> callback);
+
+    @GET("/2/rsvps")
+    void getRsvps(@Query("key") String accessToken,
+                  @Query("event_id") String eventId,
+                  Callback<MeetupApiResults<Rsvp>> callback);
 }
