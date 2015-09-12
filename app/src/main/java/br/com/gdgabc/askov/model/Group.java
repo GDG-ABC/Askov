@@ -14,11 +14,14 @@ public class Group {
         this.nextEvent = nextEvent;
     }
 
-    public String getNextEventId() {
-        return nextEvent.getId();
+    public NextEvent getNextEvent() {
+        if(null == this.nextEvent) { this.nextEvent = new NextEvent(); }
+        return this.nextEvent;
     }
 
-    public String getNextEventName() {
-        return nextEvent.getName();
+    public String getNextEventId() {
+        return getNextEvent().getId();
     }
+
+    public String getNextEventName() { return getNextEvent().getName(); }
 }

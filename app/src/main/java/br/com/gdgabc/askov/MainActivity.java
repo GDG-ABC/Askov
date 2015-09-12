@@ -2,6 +2,7 @@ package br.com.gdgabc.askov;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -27,7 +28,11 @@ public class MainActivity extends AppCompatActivity {
         Callback<Group> callback = new Callback<Group>() {
             @Override
             public void success(Group group, Response response) {
-                groupInfoTextView.setText("Próximo evento do GDG ABC:\n" + group.getNextEventName() + " (" + group.getNextEventId() + ")");
+                String nextEventName = group.getNextEventName();
+                if(TextUtils.isEmpty(nextEventName)) {
+                    nextEventName = getString(R.string.no_scheduled_meetup);
+                }
+                groupInfoTextView.setText("Próximo evento do GDG ABC:\n" + nextEventName);
             }
 
             @Override

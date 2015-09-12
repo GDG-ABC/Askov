@@ -7,6 +7,11 @@ public class NextEvent {
     private String id;
     private String name;
 
+    public NextEvent() {
+        this.id = "";
+        this.name = "";
+    }
+
     public String getId() {
         return id;
     }
